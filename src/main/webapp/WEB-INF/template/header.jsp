@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href='<c:url value="/style/main.css"/>'>
 </head>
 <body>
-	<h1 class="titre">Gestion des utilisateurs 33</h1>
+	<h1 class="titre">Gestion des utilisateurs</h1>
 	<div class="navbar">
 		<div class="nav">
 			<a class="item" href='<c:url value="/"/>'>Accueil</a>

@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.User;
 import dao.UserDao;
+import form.AddForm;
 
 /**
  * Servlet implementation class Add
@@ -29,13 +31,33 @@ public class Add extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		if (request.getParameter("login") != null) {
-			UserDao.add(new User(request.getParameter("lastname"),request.getParameter("firstname"), request.getParameter("login"), request.getParameter("password")));
+		HttpSession session = request.getSession();
+		
+		AddForm form = new AddForm(request);
+		boolean status = form.add();
+		
+		request.setAttribute("status", status);
+		request.setAttribute("statusMessage", form.getStatusMessage());
+		
+		if (status) 
+		{
+			session.setAttribute("isConnected", true);
+			session.setAttribute("sessioned_user", form.getUser());
 			response.sendRedirect("list");
 		}
-		else {
-			request.setAttribute("message", "Erreur de creation");
+		else
+		{
+			request.setAttribute("user", form.getUser());
+			request.setAttribute("errors", form.getErrors());
+			this.doGet(request, response);
 		}
+//		 if (request.getParameter("login") != null) {
+//		 	UserDao.add(new User(request.getParameter("lastname"),request.getParameter("firstname"), request.getParameter("login"), request.getParameter("password")));
+//		 	response.sendRedirect("list");
+//		 }
+//		 else {
+//		 	request.setAttribute("message", "Erreur de creation");
+//		 }
 	}
 
 }

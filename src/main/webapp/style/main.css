@@ -131,6 +131,7 @@ h1, h2 {
 
 .form-box .input-box {
   position: relative;
+  margin-bottom: 30px;
 }
 
 .form-box .input-box input {
@@ -138,7 +139,6 @@ h1, h2 {
   padding: 10px 0;
   font-size: 16px;
   color: #000;
-  margin-bottom: 30px;
   border: none;
   border-bottom: 1px solid #000;
   outline: none;
@@ -242,4 +242,8 @@ h1, h2 {
   50%,100% {
     bottom: 100%;
   }
+}
+
+.error{
+	color: red;
 }

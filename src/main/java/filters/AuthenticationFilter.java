@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter({"/", "/list", "/ajouter", "/update", "/supprimer"})
+ @WebFilter({"/", "/list", "/ajouter", "/update", "/supprimer"})
 public class AuthenticationFilter implements Filter 
 {
 	/**
@@ -28,8 +28,6 @@ public class AuthenticationFilter implements Filter
 //		HttpSession session = req.getSession();
 		
 		HttpSession session = req.getSession();
-
-
 
 		if(session.getAttribute("isConnected").equals(true)) {
 				chain.doFilter(req, resp);

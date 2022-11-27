@@ -48,11 +48,11 @@ public class UserDao
 		users.add(user);
 	}
 	
-	public static Boolean edit(User editing_user)
+	public static Boolean edit(int id, User editing_user)
 	{
 		for(User user : users)
 		{
-			if (user.equals(editing_user))
+			if (user.getId() == id)
 			{
 				user.setLastname(editing_user.getLastname());
 				user.setFirstname(editing_user.getFirstname());
