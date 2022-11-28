@@ -34,7 +34,7 @@ public class Add extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		AddForm form = new AddForm(request);
-		boolean status = form.add();
+		boolean status = form.handle(form.CREATE_MODE);
 		
 		request.setAttribute("status", status);
 		request.setAttribute("statusMessage", form.getStatusMessage());

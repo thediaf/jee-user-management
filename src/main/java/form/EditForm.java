@@ -8,12 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import beans.User;
 import dao.UserDao;
 
-public class AddForm 
+public class EditForm 
 {
-
-    public static final String EDIT_MODE = "edit";
-    public static final String CREATE_MODE = "create";
-    
 	private static final String LASTNAME = "lastname";
 	private static final String FIRSTNAME = "firstname";
 	private static final String LOGIN = "login";
@@ -22,7 +18,6 @@ public class AddForm
 	
 	private static final String ADD_ERROR_MESSAGE = "Erreur d'ajout";
 	private static final String ADD_SUCCESS_MESSAGE = "Ajout effectue avec succes";
-	private static final String EDIT_SUCCESS_MESSAGE = "Modification effectue avec succes";
 	private static final String EMPTY_FIELD_ERROR_MESSAGE = "Vous devez renseigner ce champ";
 	private static final String PASSWORD_CONFIRMATION_FAILED = "Veuillez saisir des mots de passe identiques";
 	
@@ -32,7 +27,7 @@ public class AddForm
 	private boolean status;
 	private String statusMessage;
 
-	public AddForm(HttpServletRequest request)
+	public EditForm(HttpServletRequest request)
 	{
 		this.request = request;
 		this.status = false;
@@ -40,7 +35,7 @@ public class AddForm
 		this.errors = new HashMap<String, String>();
 	}
 
-	public boolean handle(String mode) 
+	public boolean add() 
 	{
 		String lastname = this.getParameter(LASTNAME);
 		String firstname = this.getParameter(FIRSTNAME);
@@ -53,18 +48,9 @@ public class AddForm
 
 		if (this.errors.isEmpty()) 
 		{
+			UserDao.add(user);
 			this.status = true;
-			if (mode.equals(EDIT_MODE)) 
-			{
-				int id = Integer.parseInt(this.getParameter("id"));
-				UserDao.edit(id, user);
-				this.statusMessage = EDIT_SUCCESS_MESSAGE;	
-			}
-			else
-			{
-				UserDao.add(user);
-				this.statusMessage = ADD_SUCCESS_MESSAGE;
-			}
+			this.statusMessage = ADD_SUCCESS_MESSAGE;
 		}
 
 		return this.status;

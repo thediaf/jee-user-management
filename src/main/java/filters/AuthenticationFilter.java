@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter
 		
 		HttpSession session = req.getSession();
 
-		if(session.getAttribute("isConnected").equals(true)) {
+		if(session.getAttribute("isConnected") != null) {
 				chain.doFilter(req, resp);
 		}
 		else {

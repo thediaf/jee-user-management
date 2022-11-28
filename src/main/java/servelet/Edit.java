@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.User;
 import dao.UserDao;
+import form.AddForm;
 
 /**
  * Servlet implementation class Update
@@ -40,18 +42,44 @@ public class Edit extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		if (request.getParameter("login") != null) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			String lastname = request.getParameter("lastname");
-			String firstname = request.getParameter("firstname");
-			String login = request.getParameter("login");
-			String password = request.getParameter("password");
-			
-			UserDao.edit(new User(id, lastname, firstname, login, password));
+//		if (request.getParameter("login") != null) {
+//			int id = Integer.parseInt(request.getParameter("id"));
+//			String lastname = request.getParameter("lastname");
+//			String firstname = request.getParameter("firstname");
+//			String login = request.getParameter("login");
+//			String password = request.getParameter("password");
+//			
+//			
+//			boolean status = UserDao.edit(id, new User(lastname, firstname, login, password));
+//			if (status) {				
+//				response.sendRedirect("list");
+//			}
+//			else {
+//				response.sendRedirect("connexion");
+//				
+//			}
+//		}
+//		else {
+//			request.setAttribute("message", "Erreur de creation");
+//		}
+//		
+		HttpSession session = request.getSession();
+		
+		AddForm form = new AddForm(request);
+		boolean status = form.handle(form.EDIT_MODE);
+		
+		request.setAttribute("status", status);
+		request.setAttribute("statusMessage", form.getStatusMessage());
+		
+		if (status) 
+		{
 			response.sendRedirect("list");
 		}
-		else {
-			request.setAttribute("message", "Erreur de creation");
+		else
+		{
+			request.setAttribute("user", form.getUser());
+			request.setAttribute("errors", form.getErrors());
+			this.doGet(request, response);
 		}
 	}
 
