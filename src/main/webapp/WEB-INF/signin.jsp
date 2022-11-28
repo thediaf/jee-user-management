@@ -8,7 +8,7 @@
       			<label>Login</label>
     		</div>
     		<div class="input-box">
-				<input type="text" name="password" placeholder="Entrez son mot de passe">
+				<input type="password" name="password" placeholder="Entrez son mot de passe">
       			<label>Mot de passe</label>
     		</div>
     		<input type="submit" class="btn new" value="Enregistrer">

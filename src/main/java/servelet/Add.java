@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 import dao.UserDao;
-import form.AddForm;
+import form.UserForm;
 
 /**
  * Servlet implementation class Add
@@ -33,7 +33,7 @@ public class Add extends HttpServlet {
 	{
 		HttpSession session = request.getSession();
 		
-		AddForm form = new AddForm(request);
+		UserForm form = new UserForm(request);
 		boolean status = form.handle(form.CREATE_MODE);
 		
 		request.setAttribute("status", status);

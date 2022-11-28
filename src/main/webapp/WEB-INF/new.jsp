@@ -2,6 +2,7 @@
 	<div class="form-box">
 		<h2>Ajouter un utilisaeur</h2>
 		<form method="post" action="ajouter">
+			<p class="${ status ? 'success' : 'error'}">${ statusMessage }</p>
     		<div class="input-box">
 				<input type="text" name="lastname" value="${ user.lastname }" placeholder="Saisissez le nom">
       			<label>Nom</label>
@@ -18,13 +19,13 @@
 				<span class="error">${ errors.login}</span>
     		</div>
     		<div class="input-box">
-				<input type="text" name="password" placeholder="Saisissez le mot de passe">
+				<input type="password" name="password" placeholder="Saisissez le mot de passe">
       			<label>Mot de passe</label>
 				<span class="error">${ errors.password}</span>
     		</div>
     		<div class="input-box">
-				<input type="text" name="confirm_password" placeholder="Ressaisissez le mot de passe">
-      			<label>Mot de passe</label>
+				<input type="password" name="confirm_password" placeholder="Ressaisissez le mot de passe">
+      			<label>Confirmation du mot de passe</label>
 				<span class="error">${ errors.confirm_password}</span>
     		</div>
     		<input type="submit" class="btn new" value="Enregistrer">

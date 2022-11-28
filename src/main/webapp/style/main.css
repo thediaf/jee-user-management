@@ -245,5 +245,11 @@ h1, h2 {
 }
 
 .error{
+  text-align: center;
 	color: red;
+}
+
+.success{
+  text-align: center;
+	color: green;
 }

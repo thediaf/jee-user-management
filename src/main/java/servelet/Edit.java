@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 import dao.UserDao;
-import form.AddForm;
+import form.UserForm;
 
 /**
  * Servlet implementation class Update
@@ -42,30 +42,9 @@ public class Edit extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-//		if (request.getParameter("login") != null) {
-//			int id = Integer.parseInt(request.getParameter("id"));
-//			String lastname = request.getParameter("lastname");
-//			String firstname = request.getParameter("firstname");
-//			String login = request.getParameter("login");
-//			String password = request.getParameter("password");
-//			
-//			
-//			boolean status = UserDao.edit(id, new User(lastname, firstname, login, password));
-//			if (status) {				
-//				response.sendRedirect("list");
-//			}
-//			else {
-//				response.sendRedirect("connexion");
-//				
-//			}
-//		}
-//		else {
-//			request.setAttribute("message", "Erreur de creation");
-//		}
-//		
 		HttpSession session = request.getSession();
 		
-		AddForm form = new AddForm(request);
+		UserForm form = new UserForm(request);
 		boolean status = form.handle(form.EDIT_MODE);
 		
 		request.setAttribute("status", status);

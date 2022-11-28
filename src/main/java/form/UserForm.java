@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import beans.User;
 import dao.UserDao;
 
-public class AddForm 
+public class UserForm 
 {
 
     public static final String EDIT_MODE = "edit";
@@ -32,7 +32,7 @@ public class AddForm
 	private boolean status;
 	private String statusMessage;
 
-	public AddForm(HttpServletRequest request)
+	public UserForm(HttpServletRequest request)
 	{
 		this.request = request;
 		this.status = false;
@@ -47,7 +47,6 @@ public class AddForm
 		String login = this.getParameter(LOGIN);
 		String password = this.getParameter(PASSWORD);
 		
-		this.user = new User(lastname, firstname, login, password);
 		this.inputsValidation(LASTNAME, FIRSTNAME, LOGIN, PASSWORD);
 		this.passwordValidation();
 
@@ -57,11 +56,14 @@ public class AddForm
 			if (mode.equals(EDIT_MODE)) 
 			{
 				int id = Integer.parseInt(this.getParameter("id"));
-				UserDao.edit(id, user);
+				
+				this.user = new User(id, lastname, firstname, login, password);
+				UserDao.edit(user);
 				this.statusMessage = EDIT_SUCCESS_MESSAGE;	
 			}
 			else
 			{
+				this.user = new User(lastname, firstname, login, password);
 				UserDao.add(user);
 				this.statusMessage = ADD_SUCCESS_MESSAGE;
 			}
